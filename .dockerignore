@@ -1,0 +1,6 @@
+output/
+processed/
+queue/
+*.png
+*.jpg
+*.jpeg
