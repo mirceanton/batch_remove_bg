@@ -20,16 +20,16 @@ jobs:
       - name: Login to Docker Hub
         run: echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
 
-    - name: Set Image Tag
-      id: set_image_tag
-      run: |
-        if [[ -z "${{ github.event.release }}" ]]; then
-          echo "No release tag provided. Setting IMAGE_TAG to 'latest'."
-          echo "IMAGE_TAG=latest" >> $GITHUB_ENV
-        else
-          echo "Using release tag as IMAGE_TAG."
-          echo "IMAGE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
-        fi
+      - name: Set Image Tag
+        id: set_image_tag
+        run: |
+          if [[ -z "${{ github.event.release }}" ]]; then
+            echo "No release tag provided. Setting IMAGE_TAG to 'latest'."
+            echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          else
+            echo "Using release tag as IMAGE_TAG."
+            echo "IMAGE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          fi
 
       - name: Build and push Docker images
         env:
