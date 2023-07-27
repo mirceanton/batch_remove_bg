@@ -1,4 +1,4 @@
-# Image Processing with Background Removal
+# Batch Image Background Removal
 
 This Python script allows you to process images by removing their background using the `rembg` library. It is designed to continuously monitor a specific directory for incoming image files, process them, and save the processed images to the `output/` directory. The original images are then moved to a separate `processed/` directory.
 
@@ -6,13 +6,15 @@ This Python script allows you to process images by removing their background usi
 
 This code has been written out of necessity, and it is a minimal working product to solve the problem it is addressing. I often find myself needing to remove the backgrounds of images, so I here comes this script!
 
-## Requirements
+## Running it locally
+
+### Requirements
 
 - Python 3.6 or higher
 - The `rembg` library
 - `shutil`
 
-## Installation
+### Installation
 
 1. Clone this repository to your local machine:
 
@@ -34,9 +36,7 @@ This code has been written out of necessity, and it is a minimal working product
     pip install -r requirements.txt
     ```
 
-## How To Use
-
-Run the script:
+### Running the script
 
 ```bash
 python3 image_processing.py
@@ -45,6 +45,16 @@ python3 image_processing.py
 The script will continuously process incoming images from the `./queue/` directory and save the results in the `./output/` directory. The original images will be moved to the `./processed/` directory.
 
 Whenever you need to process a file, simply copy-paste it in the `./queue/` directory, and by the time you navigate to the `./output` folder, the processed image should already be there!
+
+## Running with Docker
+
+```bash
+docker run -d --name image-processing-container \
+  -v "$(pwd)/queue:/app/queue" \
+  -v "$(pwd)/output:/app/output" \
+  -v "$(pwd)/processed:/app/processed" \
+  antonmircea/batch_remove_bg
+```
 
 ## Contributing
 
